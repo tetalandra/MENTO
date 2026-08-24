@@ -2,25 +2,322 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #191c1e;
+  --mento-navy: #1a264a;
+  --mento-auth-navy: #041135;
+  --mento-border: #c6c6cd;
+  --mento-border-muted: #76777d;
+  --mento-muted: #6b7280;
+  --mento-text: #191c1e;
+  --sidebar-width: 300px;
+  --header-height: 64px;
+  --sidebar-item-height: 48px;
+  --sidebar-text-active: #1a264a;
+  --sidebar-text-muted: rgba(255, 255, 255, 0.7);
+  --sidebar-text-secondary: #c4c6d0;
+  --mento-accent: #4f6ef7;
+  --mento-accent-light: #eef2fb;
+  --mento-surface: #ffffff;
+  --mento-radius: 12px;
+  --mento-radius-lg: 16px;
+  --mento-shadow: 0 1px 2px rgba(26, 38, 74, 0.05), 0 4px 16px rgba(26, 38, 74, 0.06);
+  --mento-shadow-hover: 0 8px 24px rgba(26, 38, 74, 0.1);
+  --portal-padding-x: 1rem;
+  --portal-padding-y: 1.25rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-mento-navy: var(--mento-navy);
+  --color-mento-auth-navy: var(--mento-auth-navy);
+  --font-gabarito: var(--font-gabarito);
+  --color-mento-border: var(--mento-border);
+  --color-mento-border-muted: var(--mento-border-muted);
+  --color-mento-muted: var(--mento-muted);
+  --color-mento-text: var(--mento-text);
+  --color-mento-accent-light: var(--mento-accent-light);
+  --font-sans: var(--font-urbanist);
+  --font-urbanist: var(--font-urbanist);
+  --font-inter: var(--font-inter);
+  --font-poppins: var(--font-poppins);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+}
+
+.font-urbanist {
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+}
+
+.font-inter {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.font-poppins {
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
+
+.font-gabarito {
+  font-family: var(--font-gabarito), system-ui, sans-serif;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --portal-padding-x: 1.25rem;
+    --portal-padding-y: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --portal-padding-x: 1.5rem;
+  }
+}
+@keyframes sidebar-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sidebar-nav-item {
+  animation: sidebar-item-in 0.35s ease both;
+}
+
+.sidebar-submenu-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-submenu-grid.is-open {
+  grid-template-rows: 1fr;
+}
+
+.sidebar-submenu-inner {
+  overflow: hidden;
+}
+
+.sidebar-chevron {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.sidebar-link {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.sidebar-link:hover:not(.is-active) {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-link:active {
+  transform: scale(0.99);
+}
+
+.sidebar-link.is-active {
+  background-color: #fff;
+  color: var(--sidebar-text-active);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-logo {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes portal-main-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portal-main {
+  animation: portal-main-in 0.35s ease both;
+}
+
+/* Sidebar: scroll when needed but never show a visible scrollbar */
+.sidebar-nav-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-nav-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* ── Shared UI primitives ── */
+.portal-bg {
+  background: #ffffff;
+}
+
+.mento-card {
+  border-radius: var(--mento-radius);
+  border: 1px solid rgba(198, 198, 205, 0.5);
+  background: var(--mento-surface);
+  box-shadow: var(--mento-shadow);
+  transition: box-shadow 0.25s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.mento-card:hover {
+  box-shadow: var(--mento-shadow-hover);
+}
+
+.mento-card-interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgba(26, 38, 74, 0.15);
+}
+
+.mento-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  background: var(--mento-navy);
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(26, 38, 74, 0.2);
+}
+
+.mento-btn-primary:hover {
+  background: #152038;
+  box-shadow: 0 4px 12px rgba(26, 38, 74, 0.25);
+}
+
+.mento-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.mento-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mento-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--mento-border);
+  background: #fff;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mento-navy);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.mento-btn-secondary:hover {
+  background: var(--mento-accent-light);
+  border-color: rgba(26, 38, 74, 0.2);
+}
+
+.mento-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mento-navy);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mento-btn-ghost:hover {
+  background: var(--mento-accent-light);
+}
+
+.mento-input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--mento-border);
+  background: #fff;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: var(--mento-text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mento-input:focus {
+  border-color: var(--mento-navy);
+  box-shadow: 0 0 0 3px rgba(26, 38, 74, 0.08);
+}
+
+.mento-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--mento-radius-lg);
+  border: 1px dashed rgba(198, 198, 205, 0.8);
+  background: linear-gradient(180deg, #fff 0%, #fafbff 100%);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.mento-feedback {
+  border-radius: 10px;
+  padding: 0.875rem 1rem;
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  animation: portal-main-in 0.3s ease both;
+}
+
+.mento-feedback-success {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.mento-feedback-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.mento-table-row {
+  transition: background 0.15s ease;
+}
+
+.mento-table-row:hover {
+  background: var(--mento-accent-light);
 }
