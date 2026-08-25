@@ -28,7 +28,7 @@ export async function signupAction(_formData: FormData) {
 }
 
 export async function otpAction(_formData: FormData) {
-  redirect('/verify');
+  redirect('/verify-account');
 }
 
 export async function verifyAction() {

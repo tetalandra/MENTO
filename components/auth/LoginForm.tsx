@@ -1,9 +1,62 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { loginAction } from '@/lib/auth/actions';
-import { AuthInput, AuthSubmitButton } from './AuthFormParts';
+
+function LoginField({
+  label,
+  name,
+  type = 'text',
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+}) {
+  return (
+    <div>
+      <label htmlFor={name} className="mb-1.5 block text-[13px] font-bold text-[#041135]">
+        {label}
+      </label>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        className="h-[40px] w-full rounded-[8px] border border-[#d0d5dd] bg-white px-3.5 text-[13.5px] text-[#041135] outline-none placeholder:text-[#98a2b3] focus:border-[#041135]"
+      />
+    </div>
+  );
+}
+
+function TwoFactorToggle() {
+  const [enabled, setEnabled] = useState(false);
+
+  return (
+    <div className="flex items-center gap-2">
+      <button
+        type="button"
+        role="switch"
+        aria-checked={enabled}
+        aria-label="Toggle two-factor authentication"
+        onClick={() => setEnabled(v => !v)}
+        className={`relative h-[22px] w-[40px] shrink-0 rounded-full transition-colors duration-200 ${
+          enabled ? 'bg-[#041135]' : 'bg-[#e4e7ec]'
+        }`}
+      >
+        <span
+          className={`absolute top-[3px] size-4 rounded-full shadow-sm transition-all duration-200 ${
+            enabled ? 'translate-x-[20px] bg-white' : 'translate-x-[3px] bg-[#041135]'
+          }`}
+        />
+      </button>
+      <span className="text-[13px] font-medium text-[#041135]">2FA</span>
+      <input type="hidden" name="twoFactor" value={enabled ? 'on' : ''} />
+    </div>
+  );
+}
 
 export function LoginForm() {
   const [pending, startTransition] = useTransition();
@@ -13,36 +66,54 @@ export function LoginForm() {
   }
 
   return (
-    <div className="w-full max-w-md">
-      <h1 className="font-gabarito text-3xl font-bold text-mento-auth-navy">Welcome Back!</h1>
-      <p className="mt-2 font-gabarito text-sm text-gray-500">Sign in to your Mento account</p>
+    <div className="w-full max-w-[340px]">
+      <div className="text-center">
+        <h1 className="text-[26px] font-bold leading-none text-[#041135]">Login</h1>
+        <p className="mt-2 text-[13px] font-normal text-[#667085]">
+          sign in to your account and unlock exclusive features
+        </p>
+      </div>
 
-      <form action={handleSubmit} className="mt-8 space-y-4">
-        <AuthInput label="Email" name="email" type="email" defaultValue="student@rca.ac.rw" />
-        <AuthInput label="Password" name="password" type="password" defaultValue="password" />
+      <form action={handleSubmit} className="mt-8 space-y-[14px]">
+        <LoginField
+          label="Email Adress / ID"
+          name="email"
+          type="text"
+          placeholder="e.g John@gmail.com"
+        />
+        <LoginField
+          label="Password"
+          name="password"
+          type="password"
+          placeholder="Enter your password here"
+        />
 
-        <div className="flex items-center justify-between">
-          <label className="flex items-center gap-2 font-gabarito text-xs text-gray-600">
-            <input type="checkbox" name="remember" defaultChecked className="size-4 rounded" />
-            Remember me
+        <div className="flex items-center justify-between pt-1">
+          <label className="flex cursor-pointer items-center gap-2">
+            <input
+              type="checkbox"
+              name="remember"
+              className="size-[15px] appearance-none rounded-[3px] border border-[#d0d5dd] bg-white checked:border-[#041135] checked:bg-[#041135] checked:bg-[url('data:image/svg+xml,%3Csvg viewBox=%270 0 12 12%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M2.5 6.2L4.8 8.5L9.5 3.5%27 stroke=%27white%27 stroke-width=%271.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E')] checked:bg-center checked:bg-no-repeat"
+            />
+            <span className="text-[13px] font-medium text-[#041135]">Remember me</span>
           </label>
-          <Link href="/forgot-password" className="font-gabarito text-xs font-medium text-mento-auth-navy hover:underline">
-            Forgot password?
-          </Link>
+          <TwoFactorToggle />
         </div>
 
-        <AuthSubmitButton label={pending ? 'Signing in…' : 'Login'} pending={pending} />
+        <button
+          type="submit"
+          disabled={pending}
+          className="mt-2 h-[44px] w-full rounded-[8px] bg-[#041135] text-[14px] font-bold text-white transition hover:bg-[#030d28] disabled:opacity-60"
+        >
+          {pending ? 'Signing in…' : 'Login'}
+        </button>
       </form>
 
-      <p className="mt-6 text-center font-gabarito text-sm text-gray-600">
+      <p className="mt-5 text-center text-[13px] text-[#041135]">
         Don&apos;t have an account?{' '}
-        <Link href="/signup" className="font-semibold text-mento-auth-navy hover:underline">
-          Get started
+        <Link href="/signup" className="font-bold hover:underline">
+          Sign up
         </Link>
-      </p>
-
-      <p className="mt-4 text-center font-gabarito text-xs text-gray-400">
-        Demo tip: use admin@ / teacher@ / student@ in email to switch roles
       </p>
     </div>
   );

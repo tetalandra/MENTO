@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
-import { AuthCard } from '@/components/auth/AuthCard';
+import { AuthSplitShell } from '@/components/auth/AuthSplitShell';
 import { LoginForm } from '@/components/auth/LoginForm';
 
 export default async function LoginPage() {
@@ -8,8 +8,8 @@ export default async function LoginPage() {
   if (session) redirect('/dashboard');
 
   return (
-    <AuthCard>
+    <AuthSplitShell>
       <LoginForm />
-    </AuthCard>
+    </AuthSplitShell>
   );
 }

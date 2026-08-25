@@ -201,7 +201,7 @@ export function getSidebarVariant(role: Role): SidebarVariant {
 
 /** Page title shown in header — keyed by pathname */
 export const PAGE_TITLES: Record<string, string> = {
-  '/dashboard': 'Dashboard',
+  '/dashboard': 'DASHBOARD',
   '/appointments': 'Appointments',
   '/appointments/request': 'Request Appointment',
   '/mentors': 'Mentors',

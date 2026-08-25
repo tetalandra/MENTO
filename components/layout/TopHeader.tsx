@@ -22,23 +22,12 @@ export function TopHeader({ session }: TopHeaderProps) {
     .toUpperCase();
 
   return (
-    <header className="sticky top-0 z-20 flex h-[var(--header-height)] items-center justify-between border-b border-mento-border/60 bg-white/90 px-[var(--portal-padding-x)] backdrop-blur-md">
-      <div>
-        <p className="font-urbanist text-xs font-medium uppercase tracking-wider text-mento-muted">
-          Institutional Portal
-        </p>
-        <h1 className="font-urbanist text-xl font-bold text-mento-navy md:text-2xl">{title}</h1>
-      </div>
+    <header className="sticky top-0 z-20 flex h-[var(--header-height)] items-center justify-between border-b border-mento-border/60 bg-white px-[var(--portal-padding-x)]">
+      <h1 className="font-urbanist text-sm font-bold uppercase tracking-[0.12em] text-mento-navy md:text-base">
+        {title}
+      </h1>
 
       <div className="flex items-center gap-2 md:gap-3">
-        <Link
-          href="/dashboard"
-          className="mento-btn-ghost hidden !rounded-full border border-transparent hover:border-mento-border md:flex"
-        >
-          <Icon name="search" className="size-4 text-mento-muted" />
-          <span className="text-mento-muted">Search…</span>
-        </Link>
-
         <button
           type="button"
           className="mento-btn-ghost !rounded-full !p-2.5"
@@ -52,15 +41,23 @@ export function TopHeader({ session }: TopHeaderProps) {
 
         <Link
           href="/settings"
-          className="ml-1 flex items-center gap-2.5 rounded-xl border border-mento-border/60 bg-mento-accent-light/40 py-1.5 pl-1.5 pr-3 transition hover:bg-mento-accent-light"
+          className="ml-1 flex items-center gap-2.5 rounded-xl py-1.5 pl-1.5 pr-2 transition hover:bg-mento-accent-light/60"
         >
-          <div className="flex size-8 items-center justify-center rounded-lg bg-mento-navy font-urbanist text-xs font-bold text-white shadow-sm">
+          <div className="flex size-9 items-center justify-center overflow-hidden rounded-full bg-mento-navy font-urbanist text-xs font-bold text-white shadow-sm">
             {initials}
           </div>
-          <span className="hidden font-urbanist text-sm font-semibold text-mento-text sm:inline">
-            {session.user.name}
-          </span>
-          <Icon name="chevron-down" className="hidden size-3 text-mento-muted sm:block" />
+          <div className="hidden leading-tight sm:block">
+            <p className="font-urbanist text-sm font-semibold text-mento-text">{session.user.name}</p>
+            <p className="font-urbanist text-xs text-mento-muted">
+              {session.role === 'SUPER_ADMIN'
+                ? 'Super Admin'
+                : session.role === 'ADMIN'
+                  ? 'Admin'
+                  : session.role === 'TEACHER'
+                    ? 'Mentor'
+                    : 'Student'}
+            </p>
+          </div>
         </Link>
       </div>
     </header>
