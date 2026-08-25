@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
-import { AuthCard } from '@/components/auth/AuthCard';
+import { SignupShell } from '@/components/auth/SignupShell';
 import { SignupForm } from '@/components/auth/SignupForm';
 
 export default async function SignupPage() {
@@ -8,8 +8,8 @@ export default async function SignupPage() {
   if (session) redirect('/dashboard');
 
   return (
-    <AuthCard>
+    <SignupShell>
       <SignupForm />
-    </AuthCard>
+    </SignupShell>
   );
 }
