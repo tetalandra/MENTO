@@ -1,8 +1,14 @@
 import { requireAnyPage } from '@/lib/portal/guard';
+import { authorize } from '@/lib/rbac/authorize';
+import { AppointmentsManagement } from '@/components/appointments/AppointmentsManagement';
 import { DataTable, PageSection, TabNav } from '@/components/portal/PageSection';
 
 export default async function AppointmentsPage() {
-  await requireAnyPage(['appointment:read_own', 'appointment:manage']);
+  const session = await requireAnyPage(['appointment:read_own', 'appointment:manage']);
+
+  if (authorize(session, 'appointment:manage')) {
+    return <AppointmentsManagement />;
+  }
 
   return (
     <PageSection

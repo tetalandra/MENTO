@@ -126,6 +126,13 @@ export const PORTAL_NAV: NavGroup[] = [
     children: [
       { id: 'users', label: 'Users', href: '/users', permission: 'user:manage', icon: 'user-cog' },
       { id: 'roles', label: 'Roles', href: '/users/roles', permission: 'role:manage', icon: 'users' },
+      {
+        id: 'mentorship-connect',
+        label: 'Mentorship Connect',
+        href: '/users/mentorship-connect',
+        permission: 'user:manage',
+        icon: 'users',
+      },
     ],
   },
   {
@@ -202,16 +209,18 @@ export function getSidebarVariant(role: Role): SidebarVariant {
 /** Page title shown in header — keyed by pathname */
 export const PAGE_TITLES: Record<string, string> = {
   '/dashboard': 'DASHBOARD',
-  '/appointments': 'Appointments',
-  '/appointments/request': 'Request Appointment',
+  '/appointments': 'PORTAL',
+  '/appointments/request': 'REQUEST APPOINTMENT',
   '/mentors': 'Mentors',
-  '/sessions/record': 'Record Sessions',
-  '/reports': 'Reports',
+  '/sessions/record': 'PORTAL',
+  '/reports': 'Report Management',
   '/profiles': 'Profiles',
   '/users': 'User Management',
   '/users/add': 'Add User',
-  '/users/roles': 'Assign Roles',
+  '/users/roles': 'ROLES',
+  '/users/mentorship-connect': 'MENTOR PORTAL',
   '/templates': 'Template Management',
+  '/templates/create': 'Create Template',
   '/analytics': 'Analytics',
   '/surveys': 'Mentorship Surveys',
   '/chatbot': 'AI Chatbot',
