@@ -114,7 +114,7 @@ export const PORTAL_NAV: NavGroup[] = [
     icon: 'user-circle',
     permission: 'profile:read',
     section: 'primary',
-    variants: ['teacher', 'admin'],
+    variants: ['teacher'],
   },
   {
     id: 'user-management',
@@ -189,15 +189,6 @@ export const PORTAL_NAV: NavGroup[] = [
     section: 'footer',
     variants: ['student', 'teacher', 'admin'],
   },
-  {
-    id: 'support',
-    label: 'Support',
-    href: '/support',
-    icon: 'life-buoy',
-    permission: 'support:read',
-    section: 'footer',
-    variants: ['student', 'teacher', 'admin'],
-  },
 ];
 
 export function getSidebarVariant(role: Role): SidebarVariant {
@@ -221,12 +212,11 @@ export const PAGE_TITLES: Record<string, string> = {
   '/users/mentorship-connect': 'MENTOR PORTAL',
   '/templates': 'Template Management',
   '/templates/create': 'Create Template',
-  '/analytics': 'Analytics',
-  '/surveys': 'Mentorship Surveys',
-  '/chatbot': 'AI Chatbot',
-  '/peer-review': 'Peer Review',
-  '/settings': 'Settings',
-  '/settings/security': 'Security',
-  '/settings/notifications': 'Notifications',
-  '/support': 'Support',
+  '/analytics': 'ATTENDANCE',
+  '/surveys': 'PORTAL',
+  '/chatbot': 'PORTAL',
+  '/peer-review': 'MENTO',
+  '/settings': 'Account Settings',
+  '/settings/security': 'Account Settings',
+  '/settings/notifications': 'Account Settings',
 };
