@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/icons';
+import { MentorRecommendationsModal } from './MentorRecommendationsModal';
+import { MentorProfileModal } from './MentorProfileModal';
 
 const TIME_SLOTS = [
   { label: '08:00 AM', disabled: false },
@@ -40,6 +42,8 @@ export function RequestAppointmentForm() {
   const [selectedTime, setSelectedTime] = useState('01:00 PM');
   const [purpose, setPurpose] = useState('');
   const [prevSelected, setPrevSelected] = useState<Set<string>>(new Set());
+  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
+  const [showMentorProfile, setShowMentorProfile] = useState(false);
 
   function togglePrev(id: string) {
     setPrevSelected(prev => {
@@ -216,6 +220,7 @@ export function RequestAppointmentForm() {
                 <span className="text-xs font-semibold">{m.match}</span>
                 <button
                   type="button"
+                  onClick={() => setShowMentorProfile(true)}
                   className="rounded-md bg-white px-2 py-1 text-[10px] font-bold text-mento-navy transition hover:bg-white/90"
                 >
                   request
@@ -227,6 +232,7 @@ export function RequestAppointmentForm() {
 
         <button
           type="button"
+          onClick={() => setShowAllRecommendations(true)}
           className="mt-auto flex h-11 w-full items-center justify-center rounded-lg bg-white text-sm font-bold text-mento-navy transition hover:bg-white/90"
         >
           View All recommendations
@@ -308,6 +314,15 @@ export function RequestAppointmentForm() {
           View All Appointments
         </Link>
       </div>
+
+      <MentorRecommendationsModal
+        open={showAllRecommendations}
+        onClose={() => setShowAllRecommendations(false)}
+      />
+      <MentorProfileModal
+        open={showMentorProfile}
+        onClose={() => setShowMentorProfile(false)}
+      />
     </div>
   );
 }
