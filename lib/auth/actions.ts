@@ -70,7 +70,7 @@ export async function signInAction(role: Role, _redirectTo = '/dashboard') {
 
 export async function signOutAction() {
   await clearSession();
-  redirect('/');
+  redirect('/login');
 }
 
 /** Dev/demo: simulate a different authenticated user without URL-based role params. */

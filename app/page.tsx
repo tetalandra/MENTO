@@ -124,7 +124,16 @@ export default async function HomePage() {
       {/* ── Navigation ── */}
       <header className="landing-nav sticky top-0 z-50 bg-mento-auth-navy">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-xl font-bold tracking-wide text-white">
+          <Link href="/" className="flex items-center gap-2.5 text-xl font-bold tracking-wide text-white">
+            <span className="flex size-8 items-center justify-center overflow-hidden rounded-md bg-white p-0.5">
+              <img
+                src="/images/mento-logo.png"
+                alt=""
+                width={28}
+                height={28}
+                className="size-7 object-contain"
+              />
+            </span>
             MENTO
           </Link>
           <nav className="hidden items-center gap-10 text-xs font-semibold tracking-widest md:flex">
@@ -387,7 +396,18 @@ export default async function HomePage() {
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div>
-              <p className="text-xl font-bold tracking-wide">MENTO</p>
+              <p className="flex items-center gap-2.5 text-xl font-bold tracking-wide">
+                <span className="flex size-7 items-center justify-center overflow-hidden rounded-md bg-white p-0.5">
+                  <img
+                    src="/images/mento-logo.png"
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="size-6 object-contain"
+                  />
+                </span>
+                MENTO
+              </p>
               <p className="mt-4 text-sm leading-relaxed text-white/60">
                 Kigali, Rwanda
                 <br />

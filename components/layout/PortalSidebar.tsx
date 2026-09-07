@@ -155,8 +155,14 @@ export function PortalSidebar({ session }: PortalSidebarProps) {
     >
       <div className="shrink-0 pb-6 pt-6">
         <Link href="/dashboard" className="sidebar-logo flex items-center gap-3 px-6">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white">
-            <Icon name="logo" className="size-5 text-mento-navy" />
+          <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white p-1 shadow-sm">
+            <img
+              src="/images/mento-logo.png"
+              alt="MENTO"
+              width={32}
+              height={32}
+              className="size-8 object-contain"
+            />
           </div>
           <div className="min-w-0">
             <p className="font-urbanist text-2xl font-bold tracking-[-0.6px] text-white">

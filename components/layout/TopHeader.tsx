@@ -35,9 +35,13 @@ export function TopHeader({ session }: TopHeaderProps) {
         >
           <Icon name="bell" className="size-5" />
         </button>
-        <Link href="/support" className="mento-btn-ghost !rounded-full !p-2.5" aria-label="Help">
+        <button
+          type="button"
+          className="mento-btn-ghost !rounded-full !p-2.5"
+          aria-label="Help"
+        >
           <Icon name="help" className="size-5" />
-        </Link>
+        </button>
 
         <Link
           href="/settings"

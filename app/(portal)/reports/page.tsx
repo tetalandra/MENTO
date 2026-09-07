@@ -1,18 +1,8 @@
-import { requirePage } from '@/lib/portal/guard';
-import { DataTable, PageSection } from '@/components/portal/PageSection';
+import { requireAnyPage } from '@/lib/portal/guard';
+import { ReportsManagement } from '@/components/reports/ReportsManagement';
 
 export default async function ReportsPage() {
-  await requirePage('report:read');
+  await requireAnyPage(['report:read', 'report:manage']);
 
-  return (
-    <PageSection title="Reports & AI Reports" description="Session reports and AI-generated insights">
-      <DataTable
-        columns={['Student', 'Date', 'Field', 'Summary', 'Status']}
-        rows={[
-          { cells: ['John Doe', 'Aug 20, 2026', 'Academic', 'Project proposal review', 'Complete'], href: '/profiles' },
-          { cells: ['Jane Smith', 'Aug 18, 2026', 'Career', 'Internship guidance', 'Complete'], href: '/profiles' },
-        ]}
-      />
-    </PageSection>
-  );
+  return <ReportsManagement />;
 }
