@@ -3,7 +3,11 @@ import { Can } from '@/components/rbac/Can';
 import { Icon } from '@/components/ui/icons';
 import { DashboardHeader } from '@/components/ui/MentoPrimitives';
 import { AcademicCycleBadge, ActionCard, StatCard } from './widgets/StatCard';
-import { AppointmentsTable, MentorshipFieldsChart, ParticipationChart } from './StudentAnalyticsSection';
+import {
+  AppointmentsTable,
+  MentorshipFieldsChart,
+  ParticipationChart,
+} from './SharedDashboardWidgets';
 
 interface TeacherDashboardSectionProps {
   session: Session;
